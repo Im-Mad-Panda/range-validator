@@ -11,36 +11,38 @@
 // 3. Реализовать метод validate, который будет принимать число и проверять, входит ли оно в указанный диапазон чисел, если нет - кидать ошибку.
 
 class RangeValidator {
-  static #from = 0;
-  static #to = 0;
-  static get to() {
-    return this.#to;
+  constructor(from, to) {
+    this._from = from;
+    this._to = to;
   }
-  static get from() {
-    return this.#from;
+  get to() {
+    return this._to;
   }
-  static set to(value) {
-    if (value >= this.#from) {
-      this.#to = value;
+  get from() {
+    return this._from;
+  }
+  set to(value) {
+    if (value >= this._from) {
+      this._to = value;
     } else {
-      this.#to = this.#from;
+      this._to = this._from;
     }
   }
-  static set from(value) {
-    this.#from = value;
+  set from(value) {
+    this._from = value;
   }
-  static get range(){
-      const numbers = []
-      for (let i = this.#from; i <= this.#to; i++) {
-        numbers.push(i)
-      }
-      return numbers
+  get range() {
+    const numbers = [];
+    for (let i = this._from; i <= this._to; i++) {
+      numbers.push(i);
+    }
+    return numbers;
   }
-  static validate(value){
-    if (this.range.includes(value)) {
-        return true
+  validate(value) {
+    if (value >= this._from && value <= this._to) {
+      return true;
     } else {
-        throw new Error('Value is not valid!')
+      throw new Error('Value is not valid!');
     }
   }
 }
